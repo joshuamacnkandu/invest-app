@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Urban Vertical Farm",
+    "category": "Agriculture",
+    "description": "High-yield food production in city centers.",
+    "roi_percent": 12,
+    "min_investment": 100
+  },
+  {
+    "id": 2,
+    "title": "Solar Grid Alpha",
+    "category": "Energy",
+    "description": "Renewable energy for rural neighborhoods.",
+    "roi_percent": 18,
+    "min_investment": 500
+  }
+]
