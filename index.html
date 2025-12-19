@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZAMOREX | Pro</title>
     <style>
+        /* --- 1. MAIN BODY STYLES --- */
         body {
             background: radial-gradient(circle at top right, #0d1b2a, #000000);
             color: #e0e1dd;
             font-family: sans-serif;
             margin: 0;
-            padding-bottom: 95px; 
+            padding-bottom: 100px; /* Extra space for the big menu */
             min-height: 100vh;
         }
 
-        /* --- Navigation Bar Styles --- */
+        /* --- 2. BOTTOM NAVIGATION BAR (Instagram Style) --- */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -36,30 +37,46 @@
             flex: 1;
         }
 
-        .nav-item.active { color: #4cc9f0; font-weight: bold; }
+        .nav-item.active { 
+            color: #4cc9f0; 
+            font-weight: bold; 
+        }
 
-        /* Makes the nav icons large like Instagram */
+        /* This makes the icons BIG (28px) */
         .nav-item span {
             font-size: 28px;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
-        /* --- Page Layouts --- */
-        .page { display: none; padding: 20px; }
-        .page.active { display: block; }
+        /* --- 3. PAGE VISIBILITY LOGIC --- */
+        .page { 
+            display: none; /* Hides all pages by default */
+            padding: 20px; 
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .page.active { 
+            display: block; /* Only shows the active page */
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        /* --- Profile "My Page" Styles --- */
+        /* --- 4. ZAMOREX PROFILE STYLES --- */
         .profile-header { text-align: center; padding: 40px 0 20px; }
         
-        /* THIS IS THE FIX FOR THE ZAMOREX CIRCLE */
+        /* The Blue Circle with Text Inside */
         .avatar-circle {
-            width: 110px; height: 110px;
+            width: 120px; 
+            height: 120px;
             background: transparent; 
             border-radius: 50%;
-            margin: 0 auto;
-            border: 4px solid #4cc9f0;
-            /* These three lines center the text inside the circle */
+            margin: 0 auto 15px; /* Centers the circle */
+            border: 4px solid #4cc9f0; /* Blue border */
+            
+            /* Flexbox to center the text perfectly inside */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -68,22 +85,39 @@
             font-size: 18px;
             font-weight: bold;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .action-row { display: flex; justify-content: space-around; margin: 30px 0; text-align: center; }
-        .action-item { flex: 1; cursor: pointer; }
-        .action-item div:first-child { font-size: 26px; color: #4cc9f0; margin-bottom: 8px; }
-        .action-item div:last-child { font-size: 12px; }
+        /* The Row of 4 Circular Icons */
+        .action-row { 
+            display: flex; 
+            justify-content: space-around; 
+            margin: 30px 0; 
+            text-align: center; 
+        }
+        .action-item { flex: 1; cursor: pointer; transition: transform 0.2s; }
+        .action-item:active { transform: scale(0.95); }
+        .action-item div:first-child { font-size: 28px; color: #4cc9f0; margin-bottom: 8px; }
+        .action-item div:last-child { font-size: 12px; color: #e0e1dd; }
 
-        .menu-list { background: rgba(255,255,255,0.05); border-radius: 15px; overflow: hidden; }
+        /* The Menu List (Redeem Code, Service, etc.) */
+        .menu-list { 
+            background: rgba(255,255,255,0.05); 
+            border-radius: 16px; 
+            overflow: hidden; 
+            margin-top: 10px;
+        }
         .menu-item {
-            padding: 18px;
+            padding: 20px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            display: flex; justify-content: space-between;
+            display: flex; 
+            justify-content: space-between;
+            align-items: center;
             cursor: pointer;
             font-size: 15px;
         }
         .menu-item:last-child { border-bottom: none; }
+        .menu-icon { margin-right: 15px; font-size: 18px; }
     </style>
 </head>
 <body>
@@ -91,40 +125,138 @@
     <div id="home" class="page active">
         <h1>Welcome Back</h1>
         <p>Market is up 4.2% today.</p>
-    </div>
+        </div>
 
     <div id="product" class="page">
         <h2>Investment Products</h2>
-        <div id="project-list"></div>
+        <div id="project-list">
+            <p>Loading products...</p>
+        </div>
     </div>
 
     <div id="wallet" class="page">
         <h2>My Wallet</h2>
-        <div style="background: #1b263b; padding: 25px; border-radius: 15px; text-align: center;">
-            <p style="color: #778da9; margin: 0;">Total Balance</p>
-            <h1 id="balance" style="font-size: 36px; margin: 10px 0;">$0.00</h1>
+        <div style="background: #1b263b; padding: 30px; border-radius: 20px; text-align: center; margin-top: 20px;">
+            <p style="color: #778da9; margin: 0; font-size: 14px;">Total Balance</p>
+            <h1 id="balance" style="font-size: 40px; margin: 15px 0; color: #fff;">$0.00</h1>
+            <button style="background: #4cc9f0; border: none; padding: 10px 30px; border-radius: 20px; font-weight: bold; cursor: pointer;">Deposit</button>
         </div>
     </div>
 
     <div id="contact" class="page">
-        <h2>Support</h2>
+        <h2>Support Center</h2>
         <div class="menu-list">
-            <div class="menu-item"><span>🎧 Live Service</span> <span>></span></div>
+            <div class="menu-item"><span>🎧 Live Chat</span> <span>></span></div>
             <div class="menu-item"><span>📧 Email Support</span> <span>></span></div>
+            <div class="menu-item"><span>📍 Our Office</span> <span>></span></div>
         </div>
     </div>
 
     <div id="my" class="page">
         <div class="profile-header">
-            <div class="avatar-circle">ZAMOREX</div>
+            <div class="avatar-circle">
+                ZAMOREX
+            </div>
         </div>
 
         <div class="action-row">
-            <div class="action-item"><div>📊</div><div>My Product</div></div>
-            <div class="action-item"><div>👥</div><div>My Team</div></div>
-            <div class="action-item"><div>🤝</div><div>Invite</div></div>
-            <div class="action-item"><div>💰</div><div>Finance</div></div>
+            <div class="action-item">
+                <div>📊</div>
+                <div>My Product</div>
+            </div>
+            <div class="action-item">
+                <div>👥</div>
+                <div>My Team</div>
+            </div>
+            <div class="action-item">
+                <div>🤝</div>
+                <div>Invite</div>
+            </div>
+            <div class="action-item">
+                <div>💰</div>
+                <div>Finance</div>
+            </div>
         </div>
 
         <div class="menu-list">
-            <div class="menu-item" style="border: 1px solid #4cc9f0; border-radius: 10px; margin: 10
+            <div class="menu-item" style="border: 1px solid #ff4d4d; margin: 10px; border-radius: 10px; background: rgba(255, 77, 77, 0.1);">
+                <span><span class="menu-icon">🔄</span>Redeem Code</span>
+                <span style="color: #ff4d4d;">></span>
+            </div>
+            
+            <div class="menu-item">
+                <span><span class="menu-icon">🎧</span>Service</span>
+                <span>></span>
+            </div>
+            
+            <div class="menu-item">
+                <span><span class="menu-icon">🔐</span>Change Password</span>
+                <span>></span>
+            </div>
+
+            <div class="menu-item">
+                <span><span class="menu-icon">⬇️</span>Download App</span>
+                <span>></span>
+            </div>
+
+            <div class="menu-item" onclick="location.reload()" style="color: #ff6b6b;">
+                <span><span class="menu-icon">🚪</span>Log Out</span>
+                <span>></span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-item" onclick="showPage('product')">
+            <span>📦</span>Product
+        </div>
+        
+        <div class="nav-item" onclick="showPage('wallet')">
+            <span>💳</span>Wallet
+        </div>
+        
+        <div class="nav-item active" onclick="showPage('home')">
+            <span>🏠</span>Home
+        </div>
+        
+        <div class="nav-item" onclick="showPage('contact')">
+            <span>💬</span>Contact
+        </div>
+        
+        <div class="nav-item" onclick="showPage('my')">
+            <span>👤</span>My
+        </div>
+    </nav>
+
+    <script src="app.js"></script>
+    
+    <script>
+        function showPage(pageId) {
+            console.log("Switching to page:", pageId); // Debug check
+
+            // 1. Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // 2. Show the specific page clicked
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.add('active');
+            } else {
+                console.error("Page not found:", pageId);
+            }
+
+            // 3. Update the bottom icons colors
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // 4. Highlight the clicked icon
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
