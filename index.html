@@ -71,7 +71,19 @@
             padding: 15px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             display: flex; justify-content: space-between;
+        
+        /* This makes the bottom icons large and bold */
+        .nav-item span {
+            font-size: 28px; 
+            margin-bottom: 2px;
+            display: block;
         }
+
+        .nav-item {
+            font-size: 14px;
+            font-weight: bold;
+        }
+    }
     </style>
 </head>
 <body>
@@ -154,7 +166,7 @@
     <div id="my" class="page">
         <div class="profile-header">
             <div class="avatar-circle">USER</div>
-            <h3>BORALEX</h3>
+            <h3>ZAMOREX</h3>
             <span style="background:#4cc9f0; color:black; padding:2px 10px; border-radius:10px; font-size:12px;">VIP0</span>
         </div>
         <div class="menu-list">
@@ -163,13 +175,12 @@
             <div class="menu-item" onclick="location.reload()"><span>Log Out</span> <span>></span></div>
         </div>
     </div>
-
-    <nav class="bottom-nav">
-        <div class="nav-item" onclick="showPage('product')">📦<br>Product</div>
-        <div class="nav-item" onclick="showPage('wallet')">💳<br>Wallet</div>
-        <div class="nav-item active" onclick="showPage('home')">🏠<br>Home</div>
-        <div class="nav-item" onclick="showPage('contact')">💬<br>Contact</div>
-        <div class="nav-item" onclick="showPage('my')">👤<br>My</div>
+<nav class="bottom-nav">
+        <div class="nav-item" onclick="showPage('product')"><span>📦</span>Product</div>
+        <div class="nav-item" onclick="showPage('wallet')"><span>💳</span>Wallet</div>
+        <div class="nav-item active" onclick="showPage('home')"><span>🏠</span>Home</div>
+        <div class="nav-item" onclick="showPage('contact')"><span>💬</span>Contact</div>
+        <div class="nav-item" onclick="showPage('my')"><span>👤</span>My</div>
     </nav>
 
     <script src="app.js"></script>
