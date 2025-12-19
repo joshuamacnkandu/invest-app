@@ -1,30 +1,45 @@
+// Load the projects from your JSON file
 fetch('projects.json')
-    .then(res => res.json())
+    .then(response => response.json())
     .then(data => {
-        const container = document.getElementById('project-container');
-        data.forEach(p => {
-            container.innerHTML += `
-                <div class="col-12 mb-3">
-                    <div class="card project-card p-3">
-                        <span class="badge bg-primary w-25 mb-2">${p.category}</span>
-                        <h5>${p.title}</h5>
-                        <p class="small text-muted">${p.description}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-success fw-bold">${p.roi_percent}% ROI</span>
-                            <button onclick="invest('${p.title}', ${p.min_investment})" class="btn btn-sm btn-primary">Invest $${p.min_investment}</button>
-                        </div>
-                    </div>
-                </div>`;
+        const projectList = document.getElementById('project-list');
+        
+        data.forEach(project => {
+            // Create a sleek dark card for each project
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <span style="color: #4cc9f0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">${project.category}</span>
+                    <span class="roi-badge">${project.roi} ROI</span>
+                </div>
+                <h2 style="margin: 0 0 10px 0; color: white;">${project.title}</h2>
+                <p style="color: #a0a0a0; margin-bottom: 20px;">${project.description}</p>
+                <button class="invest-btn" onclick="invest('${project.title}', '${project.min_investment}')">
+                    Invest ${project.min_investment}
+                </button>
+            `;
+            projectList.appendChild(card);
         });
     });
 
-function invest(name, amount) {
-    const list = document.getElementById('portfolio-list');
-    const stats = document.getElementById('total-stats');
-    if (list.innerHTML.includes("No investments")) list.innerHTML = '';
-    stats.classList.remove('d-none');
-    list.innerHTML += `<div class="d-flex justify-content-between"><span>${name}</span><b>$${amount}</b></div>`;
-    const totalEl = document.getElementById('total-amount');
-    let total = parseInt(totalEl.innerText.replace('$', ''));
-    totalEl.innerText = `$${total + amount}`;
+// The Investment Logic
+function invest(title, amount) {
+    const portfolioList = document.getElementById('portfolio-list');
+    
+    // Remove the "No active investments" message if it's there
+    if (portfolioList.innerHTML.includes("No active investments")) {
+        portfolioList.innerHTML = '';
+    }
+
+    const item = document.createElement('div');
+    item.style.padding = '10px';
+    item.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+    item.innerHTML = `
+        <div style="font-weight: bold; color: #4cc9f0;">${title}</div>
+        <div style="font-size: 0.9rem; opacity: 0.7;">Active Asset: ${amount}</div>
+    `;
+    portfolioList.appendChild(item);
+    
+    alert("Investment Successful! Check your digital assets.");
 }
