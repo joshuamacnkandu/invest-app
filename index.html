@@ -13,6 +13,20 @@
             padding-bottom: 80px; /* Space for the bottom nav */
             min-height: 100vh;
         }
+        .action-item {
+            flex: 1;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .action-item:active {
+            transform: scale(0.9);
+        }
+        .menu-item {
+            background: rgba(255, 255, 255, 0.03);
+            margin: 5px 0;
+            border-radius: 8px;
+            padding: 18px !important;
+        }
 
         /* Navigation Bar */
         .bottom-nav {
@@ -67,9 +81,58 @@
         <p>Market is up 4.2% today.</p>
     </div>
 
-    <div id="product" class="page">
-        <h2>Investment Products</h2>
-        <div id="project-list"></div>
+    <div id="my" class="page">
+        <div class="profile-header">
+            <div class="avatar-circle">
+                <img src="https://i.ibb.co/LzNf9Pz/boralex-logo.png" alt="Boralex" style="width: 100%; border-radius: 50%;">
+            </div>
+            <h3 style="margin: 5px 0;">BORALEX</h3>
+            <div style="margin-bottom: 20px;">
+                <span style="background:#4cc9f0; color:black; padding:2px 12px; border-radius:20px; font-size:12px; font-weight:bold;">💎 VIP0</span>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-around; margin-bottom: 30px; text-align: center;">
+            <div class="action-item">
+                <div style="font-size: 24px; color: #4cc9f0;">📊</div>
+                <div style="font-size: 11px; margin-top: 5px;">My Product</div>
+            </div>
+            <div class="action-item">
+                <div style="font-size: 24px; color: #4cc9f0;">👥</div>
+                <div style="font-size: 11px; margin-top: 5px;">My Team</div>
+            </div>
+            <div class="action-item">
+                <div style="font-size: 24px; color: #4cc9f0;">🤝</div>
+                <div style="font-size: 11px; margin-top: 5px;">Invite Friends</div>
+            </div>
+            <div class="action-item">
+                <div style="font-size: 24px; color: #4cc9f0;">💰</div>
+                <div style="font-size: 11px; margin-top: 5px;">Mobile Money</div>
+            </div>
+        </div>
+
+        <div class="menu-list">
+            <div class="menu-item" style="border: 1px solid #ff4d4d; border-radius: 10px; margin-bottom: 10px;">
+                <span>🔄 Redeem Code</span>
+                <span style="color: #4cc9f0;">></span>
+            </div>
+            <div class="menu-item">
+                <span>🎧 Service</span>
+                <span>></span>
+            </div>
+            <div class="menu-item">
+                <span>🔐 Change Password</span>
+                <span>></span>
+            </div>
+            <div class="menu-item">
+                <span>⬇️ Download App</span>
+                <span>></span>
+            </div>
+            <div class="menu-item" onclick="location.reload()">
+                <span>🚪 Log Out</span>
+                <span>></span>
+            </div>
+        </div>
     </div>
 
     <div id="wallet" class="page">
