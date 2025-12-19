@@ -3,109 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InvestStream | Digital Assets</title>
+    <title>InvestStream | Pro</title>
     <style>
         body {
-            /* Deep Space Background */
             background: radial-gradient(circle at top right, #0d1b2a, #000000);
             color: #e0e1dd;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: sans-serif;
             margin: 0;
-            padding: 0;
+            padding-bottom: 80px; /* Space for the bottom nav */
             min-height: 100vh;
         }
 
-        .glass-header {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            padding: 60px 20px;
+        /* Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #0d1b2a;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 1px solid #1b263b;
+            z-index: 1000;
+        }
+
+        .nav-item {
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        h1 {
-            font-size: 3rem;
-            letter-spacing: 4px;
-            margin: 0;
-            background: linear-gradient(to right, #4cc9f0, #4361ee);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
-            padding: 0 20px;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: #4cc9f0;
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-5px);
-        }
-
-        .roi-badge {
-            color: #4cc9f0;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .invest-btn {
-            background: #4361ee;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
+            color: #778da9;
+            text-decoration: none;
+            font-size: 12px;
             cursor: pointer;
-            font-weight: 600;
-            float: right;
         }
 
-        .portfolio-box {
-            background: rgba(76, 201, 240, 0.1);
-            border: 1px dashed #4cc9f0;
-            border-radius: 16px;
-            padding: 20px;
-            height: fit-content;
+        .nav-item.active { color: #4cc9f0; }
+
+        /* Page Content Containers */
+        .page { display: none; padding: 20px; }
+        .page.active { display: block; }
+
+        /* "My Page" Styles from your screenshot */
+        .profile-header { text-align: center; padding: 40px 0; }
+        .avatar-circle {
+            width: 80px; height: 80px;
+            background: white; border-radius: 50%;
+            margin: 0 auto 10px;
+            border: 3px solid #4cc9f0;
+            display: flex; align-items: center; justify-content: center;
+            color: #0d1b2a; font-weight: bold;
+        }
+
+        .menu-list { background: rgba(255,255,255,0.05); border-radius: 15px; }
+        .menu-item {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between;
         }
     </style>
 </head>
 <body>
 
-    <div class="glass-header">
-        <h1>INVEST STREAM</h1>
-        <p style="opacity: 0.6;">Future-Proof Your Portfolio</p>
+    <div id="home" class="page active">
+        <h1>Welcome Back</h1>
+        <p>Market is up 4.2% today.</p>
     </div>
 
-    <div class="container">
-        <div class="project-grid" id="project-list">
-            </div>
+    <div id="product" class="page">
+        <h2>Investment Products</h2>
+        <div id="project-list"></div>
+    </div>
 
-        <div class="portfolio-box">
-            <h3>My Digital Assets</h3>
-            <div id="portfolio-list">
-                <p style="opacity: 0.5;">No active investments.</p>
-            </div>
+    <div id="wallet" class="page">
+        <h2>My Wallet</h2>
+        <div class="card" style="background: #1b263b; padding: 20px; border-radius: 15px;">
+            <p>Total Balance</p>
+            <h1 id="balance">$0.00</h1>
         </div>
     </div>
 
+    <div id="contact" class="page">
+        <h2>Support</h2>
+        <div class="menu-list">
+            <div class="menu-item"><span>Live Chat</span> <span>></span></div>
+            <div class="menu-item"><span>Email Support</span> <span>></span></div>
+        </div>
+    </div>
+
+    <div id="my" class="page">
+        <div class="profile-header">
+            <div class="avatar-circle">USER</div>
+            <h3>BORALEX</h3>
+            <span style="background:#4cc9f0; color:black; padding:2px 10px; border-radius:10px; font-size:12px;">VIP0</span>
+        </div>
+        <div class="menu-list">
+            <div class="menu-item"><span>Redeem Code</span> <span>></span></div>
+            <div class="menu-item"><span>Change Password</span> <span>></span></div>
+            <div class="menu-item" onclick="location.reload()"><span>Log Out</span> <span>></span></div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-item" onclick="showPage('product')">📦<br>Product</div>
+        <div class="nav-item" onclick="showPage('wallet')">💳<br>Wallet</div>
+        <div class="nav-item active" onclick="showPage('home')">🏠<br>Home</div>
+        <div class="nav-item" onclick="showPage('contact')">💬<br>Contact</div>
+        <div class="nav-item" onclick="showPage('my')">👤<br>My</div>
+    </nav>
+
     <script src="app.js"></script>
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            // Update active icon color
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 </body>
 </html>

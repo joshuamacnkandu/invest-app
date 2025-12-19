@@ -1,21 +1,28 @@
-// Load the projects from your JSON file
+// 1. Load Projects into the "Product" Page
 fetch('projects.json')
     .then(response => response.json())
     .then(data => {
         const projectList = document.getElementById('project-list');
+        projectList.innerHTML = ''; // Clear loading text
         
         data.forEach(project => {
-            // Create a sleek dark card for each project
             const card = document.createElement('div');
-            card.className = 'card';
+            // Using your sleek card styles
+            card.style.background = 'rgba(255, 255, 255, 0.05)';
+            card.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+            card.style.borderRadius = '15px';
+            card.style.padding = '20px';
+            card.style.marginBottom = '20px';
+            
             card.innerHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <span style="color: #4cc9f0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">${project.category}</span>
-                    <span class="roi-badge">${project.roi} ROI</span>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="color: #4cc9f0; font-size: 12px;">${project.category}</span>
+                    <span style="color: #4cc9f0; font-weight: bold;">${project.roi || project.roi_percent}% ROI</span>
                 </div>
-                <h2 style="margin: 0 0 10px 0; color: white;">${project.title}</h2>
-                <p style="color: #a0a0a0; margin-bottom: 20px;">${project.description}</p>
-                <button class="invest-btn" onclick="invest('${project.title}', '${project.min_investment}')">
+                <h3 style="margin: 0;">${project.title}</h3>
+                <p style="color: #778da9; font-size: 14px;">${project.description}</p>
+                <button onclick="invest('${project.title}', '${project.min_investment}')" 
+                        style="background: #4cc9f0; border: none; color: #000; padding: 10px 20px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer;">
                     Invest ${project.min_investment}
                 </button>
             `;
@@ -23,23 +30,13 @@ fetch('projects.json')
         });
     });
 
-// The Investment Logic
+// 2. Investment Logic (Updates the Wallet/Portfolio)
 function invest(title, amount) {
-    const portfolioList = document.getElementById('portfolio-list');
+    // Show a success message
+    alert("Invested " + amount + " in " + title + "!");
     
-    // Remove the "No active investments" message if it's there
-    if (portfolioList.innerHTML.includes("No active investments")) {
-        portfolioList.innerHTML = '';
-    }
-
-    const item = document.createElement('div');
-    item.style.padding = '10px';
-    item.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
-    item.innerHTML = `
-        <div style="font-weight: bold; color: #4cc9f0;">${title}</div>
-        <div style="font-size: 0.9rem; opacity: 0.7;">Active Asset: ${amount}</div>
-    `;
-    portfolioList.appendChild(item);
-    
-    alert("Investment Successful! Check your digital assets.");
+    // Update the Wallet Balance (Visual only for now)
+    const balanceElement = document.getElementById('balance');
+    balanceElement.innerText = amount; 
+    balanceElement.style.color = "#4cc9f0";
 }
